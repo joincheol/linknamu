@@ -26,11 +26,11 @@ export default function ThemeToggle() {
       aria-label="다크 모드"
       onClick={toggle}
       // 테마 확인 전에는 숨겨서 스위치가 잘못된 위치로 깜빡이지 않게 함
-      className={`relative inline-flex h-8 w-16 shrink-0 items-center rounded-full border-2 border-zinc-300 bg-zinc-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 dark:border-zinc-600 dark:bg-zinc-700 ${isDark === null ? "invisible" : ""}`}
+      className={`relative inline-flex h-8 w-16 shrink-0 items-center rounded-full border border-white/70 bg-white/45 backdrop-blur-xl transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 dark:border-white/10 dark:bg-white/[0.08] ${isDark === null ? "invisible" : ""}`}
     >
       <span
         aria-hidden
-        className="relative grid h-6 w-6 translate-x-0.5 place-items-center rounded-full bg-white shadow transition-transform duration-300 dark:translate-x-[2.125rem] dark:bg-zinc-900"
+        className="relative grid h-6 w-6 translate-x-[3px] place-items-center rounded-full bg-white shadow transition-transform duration-300 dark:translate-x-[35px] dark:bg-stone-800"
       >
         {/* 해/달 아이콘은 겹쳐 두고 회전·투명도로 전환 */}
         <svg

@@ -3,17 +3,37 @@
 @tailwind utilities;
 
 :root {
-  --background: #f4f4f5;
-  --foreground: #18181b;
+  --background: #fdf3e7;
+  --foreground: #3a2c25;
+  /* 크림 → 연한 살구색, 은은한 빛 번짐 두 개로 유리 카드 뒤에 깊이감을 줌 */
+  --background-image:
+    radial-gradient(60% 45% at 15% 10%, rgba(255, 255, 255, 0.85), transparent 70%),
+    radial-gradient(55% 45% at 90% 85%, rgba(250, 190, 160, 0.55), transparent 70%),
+    linear-gradient(165deg, #fffaf2 0%, #fdeedd 50%, #fbd8c3 100%);
 }
 
 .dark {
-  --background: #09090b;
-  --foreground: #f4f4f5;
+  --background: #1d1714;
+  --foreground: #f4ebe4;
+  --background-image:
+    radial-gradient(60% 45% at 15% 10%, rgba(255, 214, 180, 0.08), transparent 70%),
+    radial-gradient(55% 45% at 90% 85%, rgba(220, 120, 90, 0.14), transparent 70%),
+    linear-gradient(165deg, #201a16 0%, #261c17 55%, #2f201a 100%);
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-geist-sans), "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  word-break: keep-all;
+}
+
+/* 고정 레이어로 깔아 모바일에서도 스크롤 시 그라데이션이 늘어나거나 끊기지 않게 함 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--background-image);
 }

@@ -25,7 +25,7 @@ export default function LinkList({ links }: { links: LinkItem[] }) {
   };
 
   return (
-    <ul className="flex flex-col gap-4">
+    <ul className="flex flex-col gap-3.5">
       {links.map((link) => (
         <li key={link.id}>
           <LinkCard

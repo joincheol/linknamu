@@ -10,15 +10,13 @@ export type Profile = {
   image?: string; // public/ 아래 경로 (예: "/profile.jpg"). 없으면 이니셜 표시
 };
 
-// TODO: 보여 주기용 더미 값 — 실제 프로필과 링크로 교체하세요.
 export const profile: Profile = {
-  name: "홍길동",
-  bio: "개발하고 글 쓰는 사람",
-  image: "/profile-placeholder.svg",
+  name: "조인철",
+  bio: "풀스택 개발자 | 새로운 것을 경험하고 배우는 것을 좋아해요",
+  image: "/profile.jpg",
 };
 
 export const links: LinkItem[] = [
-  { id: "github", title: "GitHub", url: "https://github.com" },
-  { id: "blog", title: "블로그", url: "https://velog.io" },
-  { id: "instagram", title: "Instagram", url: "https://instagram.com" },
+  { id: "github", title: "🐙 깃허브", url: "https://github.com/joincheol" },
+  { id: "blog", title: "📝 블로그", url: "https://blog.naver.com/jju161613" },
 ];
