@@ -5,14 +5,17 @@ import type { LinkItem } from "@/data/profile";
 import LinkCard from "./LinkCard";
 
 export default function LinkList({ links }: { links: LinkItem[] }) {
-  // null이면 클릭 수를 불러오지 못한 상태 (DB 미설정 등) → 숫자를 숨김
-  const [counts, setCounts] = useState<Record<string, number> | null>(null);
+  // 데이터를 받기 전에는 빈 객체 → 모든 카드가 0회로 표시됨
+  const [counts, setCounts] = useState<Record<string, number>>({});
 
+  // 페이지가 열릴 때 모든 링크의 클릭 수를 한 번에 가져옴
   useEffect(() => {
     fetch("/api/clicks")
       .then((res) => (res.ok ? res.json() : null))
-      .then(setCounts)
-      .catch(() => setCounts(null));
+      .then((data: Record<string, number> | null) => {
+        if (data) setCounts(data);
+      })
+      .catch(() => {});
   }, []);
 
   const recordClick = (id: string) => {
@@ -21,7 +24,8 @@ export default function LinkList({ links }: { links: LinkItem[] }) {
     if (!navigator.sendBeacon?.("/api/clicks", body)) {
       fetch("/api/clicks", { method: "POST", body, keepalive: true }).catch(() => {});
     }
-    setCounts((prev) => (prev ? { ...prev, [id]: (prev[id] ?? 0) + 1 } : prev));
+    // 서버 응답을 기다리지 않고 화면의 숫자를 바로 1 올림
+    setCounts((prev) => ({ ...prev, [id]: (prev[id] ?? 0) + 1 }));
   };
 
   return (
@@ -30,7 +34,7 @@ export default function LinkList({ links }: { links: LinkItem[] }) {
         <li key={link.id}>
           <LinkCard
             link={link}
-            count={counts ? (counts[link.id] ?? 0) : undefined}
+            count={counts[link.id] ?? 0}
             onClick={() => recordClick(link.id)}
           />
         </li>
